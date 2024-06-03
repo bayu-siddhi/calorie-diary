@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">calorie-diary</string>
+    <string name="sign_in">Sign In</string>
+    <string name="login">Log In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="dont_have_account">Dont\'t have an account?</string>
+    <string name="create_account">Create an account</string>
+    <string name="login_error">email or password is wrong</string>
 </resources>
