@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">calorie-diary</string>
-    <string name="sign_in">Sign In</string>
+    <!-- Sign in / Log in-->
+    <string name="signin_big">Sign In</string>
     <string name="login">Log In</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="dont_have_account">Dont\'t have an account?</string>
     <string name="create_account">Create an account</string>
     <string name="login_error">email or password is wrong</string>
+    <!-- Sign up -->
+    <string name="signup_big">Sign Up</string>
+    <string name="signup_small">Sign up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="signup_error">email or confirmation password is wrong</string>
+    <string name="user_agreement">By creating an account, I acknowledge that I have fully read, understood, and agreed with our Terms of Use and Privacy Policy.</string>
+    <string name="signin_small">Sign in</string>
 </resources>
