@@ -16,4 +16,18 @@
     <string name="signup_error">email or confirmation password is wrong</string>
     <string name="user_agreement">By creating an account, I acknowledge that I have fully read, understood, and agreed with our Terms of Use and Privacy Policy.</string>
     <string name="signin_small">Sign in</string>
+    <!-- Input personal data -->
+    <string name="personal_data">Personal Data</string>
+    <string name="name">Name</string>
+    <string name="birthdate">Birth Date</string>
+    <string name="weight">Weight</string>
+    <string name="weight_kg">Weight (kg)</string>
+    <string name="height">Height</string>
+    <string name="height_cm">Height (cm)</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="personal_data_error">all data must be entered</string>
+    <string name="finish">Finish</string>
+
 </resources>
