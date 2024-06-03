@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".InputPersonalDataActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="37dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/personal_data"
+            android:textColor="@color/text_black"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/name"
+            android:inputType="text"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/birthdate_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/birthdate"
+            android:inputType="date"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/weight_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/weight_kg"
+            android:inputType="number"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/height_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/height_cm"
+            android:inputType="number"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:minHeight="0dp"
+            android:minWidth="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity=""
+            android:background="@drawable/text_input_rounded_corner">
+
+            <RadioButton
+                android:id="@+id/rdb_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/text_black"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins"
+                android:minHeight="0dp"
+                android:minWidth="48dp"
+                android:layout_marginStart="0dp"
+                />
+
+            <RadioButton
+                android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/text_black"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins"
+                android:minHeight="0dp"
+                android:minWidth="48dp"
+                android:layout_marginStart="31dp"
+                />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="@string/personal_data_error"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/signup_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="10dp"
+            android:text="@string/finish"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
