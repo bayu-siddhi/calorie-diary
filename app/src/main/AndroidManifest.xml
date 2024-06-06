@@ -13,17 +13,18 @@
         android:theme="@style/Theme.Caloriediary"
         tools:targetApi="31">
         <activity
-            android:name=".InputPersonalDataActivity"
+            android:name=".EditProfileActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".InputPersonalDataActivity"
+            android:exported="false"/>
         <activity
             android:name=".SignUpActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".LoginActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
