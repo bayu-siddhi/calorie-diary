@@ -1,0 +1,6 @@
+<!-- border_top.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke
+        android:width="2dp"
+        android:color="#222121" /> <!-- Change color and width as needed -->
+</shape>
