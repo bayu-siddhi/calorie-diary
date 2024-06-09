@@ -42,17 +42,17 @@
     <string name="search">Search</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
-    <string name="angkautama">/1232</string>
+    <string name="angkautama">0/1232</string>
     <string name="cal">Cal</string>
     <string name="left">Left</string>
     <string name="protein">Protein</string>
-    <string name="angkaprotein">/55 g</string>
+    <string name="angkaprotein">0/55 g</string>
     <string name="fat">Fat</string>
-    <string name="angkaprofat">/55 g</string>
+    <string name="angkaprofat">0/55 g</string>
     <string name="carbs">Carbs</string>
-    <string name="angkacarbs">/55 g</string>
+    <string name="angkacarbs">0/55 g</string>
     <string name="fiber">Fiber</string>
-    <string name="angkafiber">/55 g</string>
+    <string name="angkafiber">0/55 g</string>
     <string name="today">Today</string>
     <string name="nol">0</string>
 
