@@ -296,8 +296,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
-
+                >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -305,7 +304,7 @@
                     android:fontFamily="@font/poppins"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
-                    android:padding="8dp" />
+                    android:padding="6dp" />
 
                 <EditText
                     android:id="@+id/weight_input"
