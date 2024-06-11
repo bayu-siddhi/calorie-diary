@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddFoodActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background"
+        android:layout_margin="20dp">
+
+        <!-- Back Button -->
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start"
+            android:src="@drawable/ic_back_arrow"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back_button_desc"/>
+
+        <!-- Food Name and Calories -->
+        <TextView
+            android:id="@+id/foodName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/food_name"
+            android:textSize="25sp"
+            android:textColor="@color/text_black"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/foodCalories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/food_calories"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="18sp"
+            android:textColor="@color/text_black"
+            android:gravity="center"/>
+
+                <!-- Amount and Unit -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="21dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/foodAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:layout_weight="0.9"
+                        android:inputType="number"
+                        android:hint="@string/food_amount_hint"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/text_black"
+                        android:textColorHint="@color/text_black"
+                        android:background="@drawable/text_input_rounded_corner"
+                        android:paddingHorizontal="20dp"/>
+
+                    <TextView
+                        android:id="@+id/foodUnit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="@string/food_unit"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/text_black"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/text_input_rounded_corner"/>
+
+                </LinearLayout>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/darker_gray"/>
+
+                <!-- Nutritional Facts Label -->
+                <TextView
+                    android:id="@+id/nutritionalFactsLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/nutritional_facts_label"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_black"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"/>
+
+                <!-- Total Calories -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/totalCaloriesLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="@string/total_calories_label"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_bold"
+                        android:layout_gravity="start"/>
+
+                    <TextView
+                        android:id="@+id/totalCaloriesText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:text="93 / 500 cal"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/totalCaloriesProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progress="93"
+                    android:max="500"
+                    android:scaleY="2"
+                    android:progressTint="@color/primary"
+                    android:progressBackgroundTint="@color/primary"/>
+
+                <!-- Carbs -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/carbsLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="@string/carbs_label"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_bold"
+                        android:layout_gravity="start"/>
+
+                    <TextView
+                        android:id="@+id/CarbsText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:text="20 / 36 g"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"/>
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/carbsProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progress="20"
+                    android:max="36"
+                    android:scaleY="2"
+                    android:progressTint="@color/accent"
+                    android:progressBackgroundTint="@color/accent"/>
+
+                <!-- Protein -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/proteinLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="@string/protein_label"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_bold"
+                        android:layout_gravity="start"/>
+
+                    <TextView
+                        android:id="@+id/ProteinText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:text="1 / 30 g"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"/>
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/proteinProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progress="1"
+                    android:max="30"
+                    android:scaleY="2"
+                    android:progressTint="@color/blue"
+                    android:progressBackgroundTint="@color/blue"/>
+
+                <!-- Fat -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fatLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:text="@string/fat_label"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_bold"
+                        android:layout_gravity="start"/>
+
+                    <TextView
+                        android:id="@+id/FatText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:text="1 / 24 g"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_black"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="end"/>
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/fatProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:progress="1"
+                    android:max="24"
+                    android:scaleY="2"
+                    android:progressTint="@color/secondary"
+                    android:progressBackgroundTint="@color/secondary"/>
+
+        <!-- Add Food Button -->
+        <Button
+            android:id="@+id/addFoodButton"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/add_food_button"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/primary"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
