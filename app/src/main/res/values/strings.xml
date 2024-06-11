@@ -29,5 +29,30 @@
     <string name="female">Female</string>
     <string name="personal_data_error">all data must be entered</string>
     <string name="finish">Finish</string>
+    <!-- Add food -->
+    <string name="back_button_desc">Back</string>
+    <string name="food_name">Banana</string>
+    <string name="food_calories">93 Cal</string>
+    <string name="food_amount_hint">100</string>
+    <string name="food_unit">g</string>
+    <string name="nutritional_facts_label">Nutritional facts 🍏</string>
+    <string name="slash"> / </string>
+    <string name="total_calories_label">Total Calories</string>
+    <string name="total_calories_progress">93</string>
+    <string name="total_calories_max">500</string>
+    <string name="total_calories_unit"> Cals</string>
+    <string name="carbs_label">Carbs</string>
+    <string name="carbs_progress">20</string>
+    <string name="carbs_max">36</string>
+    <string name="carbs_unit"> g</string>
+    <string name="protein_label">Protein</string>
+    <string name="protein_progress">1</string>
+    <string name="protein_max">24</string>
+    <string name="protein_unit"> g</string>
+    <string name="fat_label">Fat</string>
+    <string name="fat_progress">1</string>
+    <string name="fat_max">30</string>
+    <string name="fat_unit"> g</string>
+    <string name="add_food_button">Add this food</string>
 
 </resources>
