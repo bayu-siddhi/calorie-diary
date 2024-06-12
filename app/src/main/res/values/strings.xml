@@ -49,5 +49,12 @@
     <string name="fat_label">Fat</string>
     <string name="fat_qty">1 / 24 g</string>
     <string name="add_food_button">Add this food</string>
+    <!-- Search Food -->
+    <string name="calorie">0/353 Cal</string>
+    <string name="addfood">Add a food to your meal!</string>
+    <string name="searchfood">Search</string>
+    <string name="typefood">Type food</string>
+    <string name="database1">Banana</string>
+    <string name="database2">93 Cal, 1 banana (100 g)</string>
 
 </resources>
