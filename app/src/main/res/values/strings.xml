@@ -56,5 +56,31 @@
     <string name="typefood">Type food</string>
     <string name="database1">Banana</string>
     <string name="database2">93 Cal, 1 banana (100 g)</string>
+    <!-- Dashboard-->
+    <string name="calorie">Calorie In Check!</string>
+    <string name="addfood">Add Food</string>
+    <string name="meals">Your Meals</string>
+    <string name="hw">Height and Weight</string>
+    <string name="berat">Enter your weight (kg)</string>
+    <string name="tinggi">Enter your Height (cm)</string>
+    <string name="submit">Submit</string>
+    <string name="angkacalorie">1000/1232 cals</string>
+    <string name="water">Water Challenge</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="angkautama">1000/1232\ncals</string>
+    <string name="cal">Cal</string>
+    <string name="left">Left</string>
+    <string name="protein">Protein</string>
+    <string name="angkaprotein">25/55 g</string>
+    <string name="fat">Fat</string>
+    <string name="angkaprofat">0/55 g</string>
+    <string name="carbs">Carbs</string>
+    <string name="angkacarbs">0/55 g</string>
+    <string name="fiber">Fiber</string>
+    <string name="angkafiber">0/55 g</string>
+    <string name="today">Today</string>
+    <string name="nol">0</string>
 
 </resources>
