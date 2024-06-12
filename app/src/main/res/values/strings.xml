@@ -29,5 +29,12 @@
     <string name="female">Female</string>
     <string name="personal_data_error">all data must be entered</string>
     <string name="finish">Finish</string>
+    <!-- Search Food -->
+    <string name="calorie">0/353 Cal</string>
+    <string name="addfood">Add a food to your meal!</string>
+    <string name="searchfood">Search</string>
+    <string name="typefood">Type food</string>
+    <string name="database1">Banana</string>
+    <string name="database2">93 Cal, 1 banana (100 g)</string>
 
 </resources>
