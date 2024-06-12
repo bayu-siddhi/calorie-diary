@@ -57,8 +57,8 @@
     <string name="database1">Banana</string>
     <string name="database2">93 Cal, 1 banana (100 g)</string>
     <!-- Dashboard-->
-    <string name="calorie">Calorie In Check!</string>
-    <string name="addfood">Add Food</string>
+    <string name="calorie_in_check">Calorie In Check!</string>
+    <string name="addfood_dashboard">Add Food</string>
     <string name="meals">Your Meals</string>
     <string name="hw">Height and Weight</string>
     <string name="berat">Enter your weight (kg)</string>

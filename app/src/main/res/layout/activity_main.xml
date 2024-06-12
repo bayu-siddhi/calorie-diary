@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:layout_marginHorizontal="10dp"
-                    android:text="@string/calorie"
+                    android:text="@string/calorie_in_check"
                     android:textSize="25sp"
                     android:textColor="@color/text_black"
                     android:fontFamily="@font/poppins_bold"
@@ -287,7 +287,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/addfood"
+                    android:text="@string/addfood_dashboard"
                     android:textSize="18sp"
                     android:paddingHorizontal="10dp"
                     android:layout_gravity="center"
@@ -417,10 +417,6 @@
 
         </LinearLayout>
 
-
-
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
