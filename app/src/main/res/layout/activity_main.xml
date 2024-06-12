@@ -271,7 +271,7 @@
                 android:fontFamily="@font/poppins_bold" />
 
             <LinearLayout
-                android:id="@+id/addfood"
+                android:id="@+id/add_food_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

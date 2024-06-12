@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/background"
-        android:layout_margin="20dp">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="37dp">
 
         <!-- Back Button -->
         <ImageButton

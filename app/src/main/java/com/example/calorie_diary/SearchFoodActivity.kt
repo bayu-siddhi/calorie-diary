@@ -1,7 +1,9 @@
 package com.example.calorie_diary
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,14 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 
-class SearchFoodActivity : AppCompatActivity() {
+class SearchFoodActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var typeFoodInput: EditText
     private lateinit var searchButton: Button
     private lateinit var foodRecyclerView: RecyclerView
     private lateinit var foodAdapter: FoodAdapter
     private lateinit var foods: List<Food>
+    private lateinit var backButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +50,14 @@ class SearchFoodActivity : AppCompatActivity() {
             val searchText = typeFoodInput.text.toString().trim()
             foodAdapter.filter(searchText)
         }
+
+        backButton = findViewById(R.id.backButton)
+        backButton.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        val intent = Intent(this@SearchFoodActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 
     // Fungsi untuk mendapatkan data makanan

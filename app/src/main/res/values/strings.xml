@@ -31,8 +31,8 @@
     <string name="finish">Finish</string>
     <!-- My Profile -->
     <string name="my_profile">My Profile</string>
-    <string name="start_weight">Start Weight</string>
-    <string name="start_height">Start Height</string>
+    <string name="start_weight">Start\nWeight</string>
+    <string name="start_height">Start\nHeight</string>
     <!-- Add food -->
     <string name="back_button_desc">Back</string>
     <string name="food_name">Banana</string>
