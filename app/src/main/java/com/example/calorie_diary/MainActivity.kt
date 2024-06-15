@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calorie_diary.data.DBHelper
+import com.example.calorie_diary.data.source.FoodSource
 import com.example.calorie_diary.data.model.CalorieDiaries
 import com.example.calorie_diary.data.model.User
 import com.example.calorie_diary.util.Calculator
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (userId != null) {
             startCaloriDiariesToday(userId)
             showCalorieDiariesToday(userId)
+            addFoodData()
         } else {
             val intent = Intent(this@MainActivity, SignUpActivity::class.java)
             startActivity(intent)
@@ -143,6 +145,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         } else {
             startCaloriDiariesToday(userId)
+        }
+    }
+
+    private fun addFoodData() {
+        if (db.getAllFood().size == 0) {
+            val foodSource = FoodSource()
+            val foodArrayList = foodSource.getFoodArrayList()
+            for (food in foodArrayList) {
+                db.addFood(food)
+            }
         }
     }
 

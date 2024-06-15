@@ -86,7 +86,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.execSQL("DELETE FROM  $CALORIE_DIARIES")
         db.execSQL("DELETE FROM  $EATING_HISTORY")
         db.execSQL("DELETE FROM $USER")
-        db.execSQL("DELETE FROM $FOOD")
+        // db.execSQL("DELETE FROM $FOOD")
         db.close()
     }
 
@@ -176,10 +176,16 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
+    fun deleteAllFood() {
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM $FOOD")
+        db.close()
+    }
+
     fun getAllFood(): ArrayList<Food> {
         val db = this.readableDatabase
         val foodArrayList = ArrayList<Food>()
-        val cursorFood = db.rawQuery("SELECT * FROM $FOOD LIMIT 20", null)
+        val cursorFood = db.rawQuery("SELECT * FROM $FOOD LIMIT 50", null)
         if (cursorFood.moveToFirst()) {
             do {
                 foodArrayList.add(
