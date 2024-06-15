@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".SignUpActivity">
+    tools:context=".InputPersonalDataActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,6 +35,23 @@
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/name"
+            android:inputType="text"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <EditText
             android:id="@+id/email_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,6 +67,98 @@
             android:textColor="@color/text_black"
             android:textColorHint="@color/text_black"
             android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/age_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/age"
+            android:inputType="number"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/weight_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/weight_kg"
+            android:inputType="number"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/height_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/text_input_rounded_corner"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/height_cm"
+            android:inputType="number"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/text_black"
+            android:textSize="12sp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:minHeight="0dp"
+            android:minWidth="48dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity=""
+            android:background="@drawable/text_input_rounded_corner">
+
+            <RadioButton
+                android:id="@+id/male_rdb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/text_black"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins"
+                android:minHeight="0dp"
+                android:minWidth="48dp"
+                android:layout_marginStart="0dp"
+                />
+
+            <RadioButton
+                android:id="@+id/female_rdb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/text_black"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins"
+                android:minHeight="0dp"
+                android:minWidth="48dp"
+                android:layout_marginStart="31dp"
+                />
+        </RadioGroup>
 
         <EditText
             android:id="@+id/password_input"
@@ -68,32 +177,16 @@
             android:textColorHint="@color/text_black"
             android:textSize="12sp" />
 
-        <EditText
-            android:id="@+id/confirm_password_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/text_input_rounded_corner"
-            android:fontFamily="@font/poppins"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="12dp"
-            android:textColor="@color/text_black"
-            android:textColorHint="@color/text_black"
-            android:textSize="12sp" />
-
         <TextView
+            android:id="@+id/signup_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:fontFamily="@font/poppins_light"
-            android:text="@string/signup_error"
+            android:text="@string/personal_data_error"
             android:textColor="@color/red"
             android:textSize="12sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -112,7 +205,7 @@
             android:backgroundTint="@color/primary"
             android:fontFamily="@font/poppins_bold"
             android:padding="10dp"
-            android:text="@string/signup_big"
+            android:text="@string/finish"
             android:textColor="@color/white"
             android:textSize="14sp" />
 

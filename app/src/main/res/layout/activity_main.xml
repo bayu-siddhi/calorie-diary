@@ -67,7 +67,7 @@
                     android:layout_gravity="center">
 
                     <ProgressBar
-                        android:id="@+id/circularProgressBar"
+                        android:id="@+id/progress_cals"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
@@ -78,7 +78,7 @@
                         android:progressDrawable="@drawable/circular_progress_bar_primary"/>
 
                     <TextView
-                        android:id="@+id/textProgress1"
+                        android:id="@+id/cals_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -94,7 +94,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calorie"
+                    android:text="Calories"
                     android:fontFamily="@font/poppins_bold"
                     android:textColor="@color/text_black"
                     android:textSize="20sp"
@@ -121,7 +121,7 @@
                         android:layout_gravity="center">
 
                         <ProgressBar
-                            android:id="@+id/progresscarbs"
+                            android:id="@+id/progress_carbs"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
@@ -132,7 +132,7 @@
                             android:progressDrawable="@drawable/circular_progress_bar_accent" />
 
                         <TextView
-                            android:id="@+id/carbstext"
+                            android:id="@+id/carbs_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -165,7 +165,7 @@
                         android:layout_gravity="center">
 
                         <ProgressBar
-                            android:id="@+id/progressprotein"
+                            android:id="@+id/progress_protein"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
@@ -176,7 +176,7 @@
                             android:progressDrawable="@drawable/circular_progress_bar_blue" />
 
                         <TextView
-                            android:id="@+id/proteintext"
+                            android:id="@+id/protein_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -211,7 +211,7 @@
                         android:layout_gravity="center">
 
                         <ProgressBar
-                            android:id="@+id/progressfat"
+                            android:id="@+id/progress_fat"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
@@ -222,7 +222,7 @@
                             android:progressDrawable="@drawable/circular_progress_bar_secondary"  />
 
                         <TextView
-                            android:id="@+id/fattext"
+                            android:id="@+id/fat_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -327,7 +327,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="@string/hw"
+                android:text="@string/personal_data"
                 android:textColor="@color/text_black"
                 android:textSize="20sp" />
 
@@ -341,21 +341,57 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
-                    android:text="@string/weight"
+                    android:layout_weight="0.35"
+                    android:text="@string/age"
                     android:fontFamily="@font/poppins"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
                     android:padding="6dp" />
 
                 <EditText
-                    android:id="@+id/weight_input"
+                    android:id="@+id/age_edit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.65"
                     android:background="@drawable/text_input_rounded_corner"
                     android:fontFamily="@font/poppins"
-                    android:hint="@string/berat"
+                    android:hint="@string/age"
+                    android:inputType="number"
+                    android:minWidth="48dp"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="12dp"
+                    android:textColor="@color/text_black"
+                    android:textColorHint="@color/text_black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:text="@string/weight_kg"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:padding="6dp" />
+
+                <EditText
+                    android:id="@+id/weight_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.65"
+                    android:background="@drawable/text_input_rounded_corner"
+                    android:fontFamily="@font/poppins"
+                    android:hint="@string/weight"
                     android:inputType="numberDecimal"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
@@ -378,21 +414,21 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
-                    android:text="@string/height"
+                    android:layout_weight="0.35"
+                    android:text="@string/height_cm"
                     android:fontFamily="@font/poppins"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
                     android:padding="8dp" />
 
                 <EditText
-                    android:id="@+id/height_input"
+                    android:id="@+id/height_edit"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.65"
                     android:background="@drawable/text_input_rounded_corner"
                     android:fontFamily="@font/poppins"
-                    android:hint="@string/tinggi"
+                    android:hint="@string/height"
                     android:inputType="numberDecimal"
                     android:minWidth="48dp"
                     android:minHeight="48dp"
@@ -401,6 +437,7 @@
                     android:textColor="@color/text_black"
                     android:textColorHint="@color/text_black"
                     android:textSize="12sp" />
+
             </LinearLayout>
 
             <Button
@@ -411,7 +448,7 @@
                 android:backgroundTint="@color/accent"
                 android:fontFamily="@font/poppins_bold"
                 android:padding="10dp"
-                android:text="@string/submit"
+                android:text="@string/save_changes"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 

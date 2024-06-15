@@ -16,7 +16,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 
-class SearchFoodActivity : AppCompatActivity(), View.OnClickListener {
+class SearchFoodActivity : AppCompatActivity() {
     private lateinit var typeFoodInput: EditText
     private lateinit var searchButton: Button
     private lateinit var foodRecyclerView: RecyclerView
@@ -44,6 +44,7 @@ class SearchFoodActivity : AppCompatActivity(), View.OnClickListener {
         // Inisialisasi EditText dan Button
         typeFoodInput = findViewById(R.id.typeFoodInput)
         searchButton = findViewById(R.id.searchButton)
+        backButton = findViewById(R.id.backButton)
 
         // Set OnClickListener untuk searchButton
         searchButton.setOnClickListener {
@@ -51,13 +52,11 @@ class SearchFoodActivity : AppCompatActivity(), View.OnClickListener {
             foodAdapter.filter(searchText)
         }
 
-        backButton = findViewById(R.id.backButton)
-        backButton.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        val intent = Intent(this@SearchFoodActivity, MainActivity::class.java)
-        startActivity(intent)
+        // Set OnClickListener untuk backButton
+        backButton.setOnClickListener {
+            val intent = Intent(this@SearchFoodActivity, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Fungsi untuk mendapatkan data makanan

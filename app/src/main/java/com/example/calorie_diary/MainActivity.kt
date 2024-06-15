@@ -5,15 +5,35 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calorie_diary.data.DBHelper
+import com.example.calorie_diary.data.model.CalorieDiaries
+import com.example.calorie_diary.data.model.User
+import com.example.calorie_diary.util.Calculator
+import com.example.calorie_diary.util.StringDate
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var db: DBHelper
+    private lateinit var calculator: Calculator
+    private lateinit var stringDate: StringDate
+
     private lateinit var profileButton: ImageView
     private lateinit var addFoodButton: LinearLayout
+    private lateinit var caloriesProgress: ProgressBar
+    private lateinit var caloriesText: TextView
+    private lateinit var carbohydrateProgress: ProgressBar
+    private lateinit var carbohydrateText: TextView
+    private lateinit var proteinsProgress: ProgressBar
+    private lateinit var proteinsText: TextView
+    private lateinit var fatProgress: ProgressBar
+    private lateinit var fatText: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -23,10 +43,31 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        db = DBHelper(this, null)
         profileButton = findViewById(R.id.profile)
-        profileButton.setOnClickListener(this)
         addFoodButton = findViewById(R.id.add_food_btn)
+        profileButton.setOnClickListener(this)
         addFoodButton.setOnClickListener(this)
+
+        caloriesProgress = findViewById(R.id.progress_cals)
+        carbohydrateProgress = findViewById(R.id.progress_carbs)
+        proteinsProgress = findViewById(R.id.progress_protein)
+        fatProgress = findViewById(R.id.progress_fat)
+
+        caloriesText = findViewById(R.id.cals_text)
+        carbohydrateText = findViewById(R.id.carbs_text)
+        proteinsText= findViewById(R.id.protein_text)
+        fatText = findViewById(R.id.fat_text)
+
+        val userId: Int? = db.getCurrentUserId()
+        if (userId != null) {
+            startCaloriDiariesToday(userId)
+            showCalorieDiariesToday(userId)
+        } else {
+            val intent = Intent(this@MainActivity, SignUpActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -38,4 +79,71 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(intent)
         }
     }
+
+    private fun startCaloriDiariesToday(userId: Int) {
+        stringDate = StringDate()
+        var calorieDiaries: CalorieDiaries? = db.getCalorieDiariesByDate(userId, stringDate.getCurrentDate())
+        if (calorieDiaries == null) {
+            val user: User? = db.getUserById(userId)
+            if (user != null) {
+                calculator = Calculator(user.gender, user.weight, user.height, user.age)
+                calorieDiaries = CalorieDiaries(userId, stringDate.getCurrentDate(),
+                    0.0, calculator.maxCalories(),
+                    0.0, calculator.maxCarbohydrate(),
+                    0.0, calculator.maxProteins(),
+                    0.0, calculator.maxFat()
+                )
+                db.addCalorieDiaries(calorieDiaries)
+            } else {
+                val intent = Intent(this@MainActivity, SignUpActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun showCalorieDiariesToday(userId: Int) {
+        stringDate = StringDate()
+        var calorieDiaries: CalorieDiaries? = db.getCalorieDiariesByDate(userId, stringDate.getCurrentDate())
+        if (calorieDiaries != null) {
+            // Calories
+            caloriesProgress.max = calorieDiaries.maxCalories.toInt()
+            caloriesProgress.progress = calorieDiaries.progressCalories.toInt()
+            caloriesText.text = buildString {
+                append(calorieDiaries.progressCalories.toInt().toString())
+                append("/")
+                append(calorieDiaries.maxCalories.toInt().toString())
+                append("\ncals")
+            }
+            // Carbohydrate
+            carbohydrateProgress.max = calorieDiaries.maxCarbohydrate.toInt()
+            carbohydrateProgress.progress = calorieDiaries.progressCarbohydrate.toInt()
+            carbohydrateText.text = buildString {
+                append(calorieDiaries.progressCarbohydrate.toInt().toString())
+                append("/")
+                append(calorieDiaries.maxCarbohydrate.toInt().toString())
+                append(" g")
+            }
+            // Proteins
+            proteinsProgress.max = calorieDiaries.maxProteins.toInt()
+            proteinsProgress.progress = calorieDiaries.progressProteins.toInt()
+            proteinsText.text = buildString {
+                append(calorieDiaries.progressProteins.toInt().toString())
+                append("/")
+                append(calorieDiaries.maxProteins.toInt().toString())
+                append(" g")
+            }
+            // Fat
+            fatProgress.max = calorieDiaries.maxFat.toInt()
+            fatProgress.progress = calorieDiaries.progressFat.toInt()
+            fatText.text = buildString {
+                append(calorieDiaries.progressFat.toInt().toString())
+                append("/")
+                append(calorieDiaries.maxFat.toInt().toString())
+                append(" g")
+            }
+        } else {
+            startCaloriDiariesToday(userId)
+        }
+    }
+
 }
