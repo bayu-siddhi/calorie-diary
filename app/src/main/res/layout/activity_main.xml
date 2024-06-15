@@ -303,154 +303,142 @@
 
             </LinearLayout>
 
-            <!-- TODO: Jadikan recyclerview dan tambahkan tombol delete-->
-            <TextView
+            <!-- RecyclerView TodayEatingHistory-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/today_eating_history_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="10dp"
-                android:text="Nasi goreng (200 g)"
-                android:fontFamily="@font/poppins"
-                android:textSize="15sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="10dp"
-                android:text="Mie goreng (150 g)"
-                android:fontFamily="@font/poppins"
-                android:textSize="15sp"/>
+                android:layout_height="wrap_content"/>
 
             <!-- Height and weight Section -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/personal_data"
-                android:textColor="@color/text_black"
-                android:textSize="20sp" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:fontFamily="@font/poppins_bold"-->
+<!--                android:text="@string/personal_data"-->
+<!--                android:textColor="@color/text_black"-->
+<!--                android:textSize="20sp" />-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.35"
-                    android:text="@string/age"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:padding="6dp" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.35"-->
+<!--                    android:text="@string/age"-->
+<!--                    android:fontFamily="@font/poppins"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:padding="6dp" />-->
 
-                <EditText
-                    android:id="@+id/age_edit"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.65"
-                    android:background="@drawable/text_input_rounded_corner"
-                    android:fontFamily="@font/poppins"
-                    android:hint="@string/age"
-                    android:inputType="number"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
-                    android:textColor="@color/text_black"
-                    android:textColorHint="@color/text_black"
-                    android:textSize="12sp" />
+<!--                <EditText-->
+<!--                    android:id="@+id/age_edit"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.65"-->
+<!--                    android:background="@drawable/text_input_rounded_corner"-->
+<!--                    android:fontFamily="@font/poppins"-->
+<!--                    android:hint="@string/age"-->
+<!--                    android:inputType="number"-->
+<!--                    android:minWidth="48dp"-->
+<!--                    android:minHeight="48dp"-->
+<!--                    android:paddingHorizontal="20dp"-->
+<!--                    android:paddingVertical="12dp"-->
+<!--                    android:textColor="@color/text_black"-->
+<!--                    android:textColorHint="@color/text_black"-->
+<!--                    android:textSize="12sp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.35"
-                    android:text="@string/weight_kg"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:padding="6dp" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.35"-->
+<!--                    android:text="@string/weight_kg"-->
+<!--                    android:fontFamily="@font/poppins"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:padding="6dp" />-->
 
-                <EditText
-                    android:id="@+id/weight_edit"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.65"
-                    android:background="@drawable/text_input_rounded_corner"
-                    android:fontFamily="@font/poppins"
-                    android:hint="@string/weight"
-                    android:inputType="numberDecimal"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
-                    android:textColor="@color/text_black"
-                    android:textColorHint="@color/text_black"
-                    android:textSize="12sp" />
+<!--                <EditText-->
+<!--                    android:id="@+id/weight_edit"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.65"-->
+<!--                    android:background="@drawable/text_input_rounded_corner"-->
+<!--                    android:fontFamily="@font/poppins"-->
+<!--                    android:hint="@string/weight"-->
+<!--                    android:inputType="numberDecimal"-->
+<!--                    android:minWidth="48dp"-->
+<!--                    android:minHeight="48dp"-->
+<!--                    android:paddingHorizontal="20dp"-->
+<!--                    android:paddingVertical="12dp"-->
+<!--                    android:textColor="@color/text_black"-->
+<!--                    android:textColorHint="@color/text_black"-->
+<!--                    android:textSize="12sp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_marginBottom="5dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:gravity="center_vertical">-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.35"
-                    android:text="@string/height_cm"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"
-                    android:padding="8dp" />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.35"-->
+<!--                    android:text="@string/height_cm"-->
+<!--                    android:fontFamily="@font/poppins"-->
+<!--                    android:textSize="16sp"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:padding="8dp" />-->
 
-                <EditText
-                    android:id="@+id/height_edit"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.65"
-                    android:background="@drawable/text_input_rounded_corner"
-                    android:fontFamily="@font/poppins"
-                    android:hint="@string/height"
-                    android:inputType="numberDecimal"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
-                    android:textColor="@color/text_black"
-                    android:textColorHint="@color/text_black"
-                    android:textSize="12sp" />
+<!--                <EditText-->
+<!--                    android:id="@+id/height_edit"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="0.65"-->
+<!--                    android:background="@drawable/text_input_rounded_corner"-->
+<!--                    android:fontFamily="@font/poppins"-->
+<!--                    android:hint="@string/height"-->
+<!--                    android:inputType="numberDecimal"-->
+<!--                    android:minWidth="48dp"-->
+<!--                    android:minHeight="48dp"-->
+<!--                    android:paddingHorizontal="20dp"-->
+<!--                    android:paddingVertical="12dp"-->
+<!--                    android:textColor="@color/text_black"-->
+<!--                    android:textColorHint="@color/text_black"-->
+<!--                    android:textSize="12sp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-            <Button
-                android:id="@+id/submit_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:backgroundTint="@color/accent"
-                android:fontFamily="@font/poppins_bold"
-                android:padding="10dp"
-                android:text="@string/save_changes"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+<!--            <Button-->
+<!--                android:id="@+id/submit_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:backgroundTint="@color/accent"-->
+<!--                android:fontFamily="@font/poppins_bold"-->
+<!--                android:padding="10dp"-->
+<!--                android:text="@string/save_changes"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="14sp" />-->
 
         </LinearLayout>
 
