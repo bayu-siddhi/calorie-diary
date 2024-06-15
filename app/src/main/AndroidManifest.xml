@@ -23,13 +23,13 @@
             android:exported="false"/>
         <activity
             android:name=".InputPersonalDataActivity"
-            android:exported="false"></activity>
+            android:exported="false"/>
         <activity
             android:name=".SignUpActivity"
-            android:exported="false"></activity>
+            android:exported="true"/>
         <activity
             android:name=".LoginActivity"
-            android:exported="false"></activity>
+            android:exported="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
