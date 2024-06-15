@@ -38,6 +38,7 @@ android {
 dependencies {
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("com.ToxicBakery.library.bcrypt:bcrypt:1.0.9")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
