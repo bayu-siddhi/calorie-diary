@@ -45,11 +45,12 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 " PRIMARY KEY (id) );")
 
         val eatingHistory = ("CREATE TABLE $EATING_HISTORY (" +
+                " id          INTEGER NOT NULl," +
                 " user_id     INTEGER NOT NULl," +
                 " date        TEXT    NOT NULL," +
                 " food_id     INTEGER NOT NULL," +
                 " food_weight INTEGER NOT NULL," +
-                " PRIMARY KEY (user_id, date, food_id)," +
+                " PRIMARY KEY (id)," +
                 " FOREIGN KEY (user_id) REFERENCES $USER (id)," +
                 " FOREIGN KEY (food_id) REFERENCES $FOOD (id) );")
 
@@ -74,6 +75,15 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, p1: Int, p2: Int) {
+        db.execSQL("DROP TABLE IF EXISTS $USER")
+        db.execSQL("DROP TABLE IF EXISTS $FOOD")
+        db.execSQL("DROP TABLE IF EXISTS $EATING_HISTORY")
+        db.execSQL("DROP TABLE IF EXISTS $CALORIE_DIARIES")
+        onCreate(db)
+    }
+
+    fun reCreateTable() {
+        val db = this.writableDatabase
         db.execSQL("DROP TABLE IF EXISTS $USER")
         db.execSQL("DROP TABLE IF EXISTS $FOOD")
         db.execSQL("DROP TABLE IF EXISTS $EATING_HISTORY")
@@ -156,7 +166,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put("gender", gender)
 
         val db = this.writableDatabase
-        db.update(USER, values, "WHERE id = ?", arrayOf(id.toString()))
+        db.update(USER, values, "id = ?", arrayOf(id.toString()))
         db.close()
     }
 
@@ -173,12 +183,6 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
         val db = this.writableDatabase
         db.insert(FOOD, null, values)
-        db.close()
-    }
-
-    fun deleteAllFood() {
-        val db = this.writableDatabase
-        db.execSQL("DELETE FROM $FOOD")
         db.close()
     }
 
@@ -257,11 +261,18 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
+    fun deleteEatingHistoryById(id: Int) {
+        val db = this.writableDatabase
+        db.delete(EATING_HISTORY, "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
     fun getEatingHistoryByDate(userId: Int, date: String): ArrayList<TodayEatingHistory> {
         val db = this.readableDatabase
         val todayEatingHistoryArrayList = ArrayList<TodayEatingHistory>()
         val cursorEatingHistory = db.rawQuery(
-            "SELECT f.name AS name, " +
+            "SELECT e.id AS id," +
+                    "f.name AS name, " +
                     "e.food_weight AS food_weight " +
                     "FROM $EATING_HISTORY AS e " +
                     "INNER JOIN $FOOD AS f ON e.food_id = f.id " +
@@ -271,8 +282,9 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             do {
                 todayEatingHistoryArrayList.add(
                     TodayEatingHistory(
-                        cursorEatingHistory.getString(0),
-                        cursorEatingHistory.getInt(1)
+                        cursorEatingHistory.getInt(0),
+                        cursorEatingHistory.getString(1),
+                        cursorEatingHistory.getInt(2)
                     )
                 )
             } while (cursorEatingHistory.moveToNext())
@@ -333,7 +345,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             values.put("progress_fat", todayCalorieDiaries.progressFat + fat)
 
             val db = this.writableDatabase
-            db.update(CALORIE_DIARIES, values, "WHERE user_id = ? AND date = ?", arrayOf(userId.toString(), date))
+            db.update(CALORIE_DIARIES, values, "user_id = ? AND date = ?", arrayOf(userId.toString(), date))
             db.close()
         }
     }
@@ -346,7 +358,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put("max_fat", maxFat)
 
         val db = this.writableDatabase
-        db.update(CALORIE_DIARIES, values, "WHERE user_id = ? AND date = ?", arrayOf(id.toString(), date))
+        db.update(CALORIE_DIARIES, values, "user_id = ? AND date = ?", arrayOf(id.toString(), date))
         db.close()
     }
 }

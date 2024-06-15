@@ -2,7 +2,9 @@ package com.example.calorie_diary
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -11,9 +13,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calorie_diary.data.DBHelper
 import com.example.calorie_diary.data.source.FoodSource
 import com.example.calorie_diary.data.model.CalorieDiaries
+import com.example.calorie_diary.data.model.EatingHistory
+import com.example.calorie_diary.data.model.TodayEatingHistory
 import com.example.calorie_diary.data.model.User
 import com.example.calorie_diary.util.Calculator
 import com.example.calorie_diary.util.StringDate
@@ -34,6 +40,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var proteinsText: TextView
     private lateinit var fatProgress: ProgressBar
     private lateinit var fatText: TextView
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var todayEatingHistoryArrayList: ArrayList<TodayEatingHistory>
+    private lateinit var todayEatingHistoryAdapter: TodayEatingHistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +75,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (userId != null) {
             startCaloriDiariesToday(userId)
             showCalorieDiariesToday(userId)
+            showEatingHistoryToday(userId)
             addFoodData()
         } else {
             val intent = Intent(this@MainActivity, SignUpActivity::class.java)
@@ -148,6 +159,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun showEatingHistoryToday(userId: Int) {
+        stringDate = StringDate()
+        recyclerView = findViewById(R.id.today_eating_history_recyclerview)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        todayEatingHistoryArrayList = db.getEatingHistoryByDate(userId, stringDate.getCurrentDate())
+        // Data Dummy
+        // if (todayEatingHistoryArrayList.size == 0) {
+        // db.addEatingHistory(EatingHistory(1, 1, stringDate.getCurrentDate(), 1, 100))
+        // db.addEatingHistory(EatingHistory(2, 1, stringDate.getCurrentDate(), 2, 200))
+        // db.addEatingHistory(EatingHistory(3, 1, stringDate.getCurrentDate(), 3, 300))
+        // db.addEatingHistory(EatingHistory(4, 1, stringDate.getCurrentDate(), 4, 300))
+        // db.addEatingHistory(EatingHistory(5, 1, stringDate.getCurrentDate(), 5, 300))
+        // db.addEatingHistory(EatingHistory(6, 1, stringDate.getCurrentDate(), 6, 300))
+        // todayEatingHistoryArrayList = db.getEatingHistoryByDate(userId, stringDate.getCurrentDate())
+        // }
+        todayEatingHistoryAdapter = TodayEatingHistoryAdapter(todayEatingHistoryArrayList)
+        recyclerView.adapter = todayEatingHistoryAdapter
+
+        todayEatingHistoryAdapter.onItemClick = {
+            db.deleteEatingHistoryById(it.id)
+            showEatingHistoryToday(userId)
+        }
+    }
+
     private fun addFoodData() {
         if (db.getAllFood().size == 0) {
             val foodSource = FoodSource()
@@ -157,5 +194,39 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+}
 
+class TodayEatingHistoryAdapter(
+    private val todayEatingHistoryArrayList: ArrayList<TodayEatingHistory>
+): RecyclerView.Adapter<TodayEatingHistoryAdapter.TodayEatingHistoryViewHolder>() {
+
+    var onItemClick: ((TodayEatingHistory) -> Unit)? = null
+
+    class TodayEatingHistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val eatingHistoryText: TextView = itemView.findViewById(R.id.today_eating_history_text)
+        val delete: ImageView = itemView.findViewById(R.id.delete)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodayEatingHistoryViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_today_eating_history,
+            parent, false)
+        return TodayEatingHistoryViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return todayEatingHistoryArrayList.size
+    }
+
+    override fun onBindViewHolder(holder: TodayEatingHistoryViewHolder, position: Int) {
+        val todayEatingHistory = todayEatingHistoryArrayList[position]
+        holder.eatingHistoryText.text = buildString {
+            append(todayEatingHistory.name)
+            append(" (")
+            append(todayEatingHistory.foodWeight.toString())
+            append(" g)")
+        }
+        holder.delete.setOnClickListener {
+            onItemClick?.invoke(todayEatingHistory)
+        }
+    }
 }
