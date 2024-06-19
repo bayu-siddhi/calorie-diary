@@ -77,14 +77,6 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 femaleGenderInput.isChecked = true
             }
-
-            // Tentukan gender berdasarkan RadioButton yang dipilih
-            var gender = ""
-            if (maleGenderInput.isChecked) {
-                gender = "M"
-            } else if (femaleGenderInput.isChecked) {
-                gender = "F"
-            }
         }
         saveChangesButton.setOnClickListener {
             saveChanges()
@@ -108,14 +100,19 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         val userId = user.id
         if (userId != null) {
             db.updateUser(userId, newName, newAge, newWeight, newHeight, newGender)
-            Toast.makeText(this, "Changes saved successfully", Toast.LENGTH_SHORT).show()
 
            // Update Calculator with new user data
             calculator = Calculator(newGender, newWeight, newHeight, newAge)
 
             // Update calorie diaries in MainActivity
             val currentDate = StringDate().getCurrentDate()
-            db.updateCalorieDiariesMax(userId, currentDate, calculator.maxCalories(), calculator.maxCarbohydrate(), calculator.maxProteins(), calculator.maxFat())
+            db.updateCalorieDiariesMax(
+                userId, currentDate,
+                calculator.maxCalories(),
+                calculator.maxCarbohydrate(),
+                calculator.maxProteins(),
+                calculator.maxFat()
+            )
 
             // Navigate back to the main activity
             val intent = Intent(this, MainActivity::class.java)
