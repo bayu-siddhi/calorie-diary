@@ -106,6 +106,8 @@
                 android:background="@drawable/text_input_rounded_corner"
                 android:fontFamily="@font/poppins"
                 android:hint="@string/email"
+                android:focusable="false"
+                android:clickable="false"
                 android:inputType="textEmailAddress"
                 android:minWidth="48dp"
                 android:minHeight="48dp"
