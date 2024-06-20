@@ -58,12 +58,12 @@ class AddFoodActivity : AppCompatActivity(), View.OnClickListener {
 
         dbHelper = DBHelper(this, null)
 
-        val foodName = intent.getStringExtra("foodName")
+        val foodId = intent.getIntExtra("foodId", 0)
         val calorieDiaries = dbHelper.getCalorieDiariesByDate(dbHelper.getCurrentUserId()!!, "2024-06-20") // Ganti dengan tanggal yang sesuai
-        foodNameTextView.text = foodName
+        foodNameTextView.text = foodId.toString()
 
         // Get food data from the database
-        val food = dbHelper.getFoodByName(foodName!!)
+        val food = dbHelper.getFoodById(foodId)
         if (food != null && calorieDiaries != null) {
             val foodCalories = food.calories * 100
             val foodCarbs = food.carbohydrate * 100

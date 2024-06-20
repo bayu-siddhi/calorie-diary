@@ -15,10 +15,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import com.example.calorie_diary.data.DBHelper
 import com.example.calorie_diary.data.model.Food
-import com.example.calorie_diary.data.source.FoodSource
 
 class SearchFoodActivity : AppCompatActivity() {
+    private lateinit var db: DBHelper
     private lateinit var typeFoodInput: EditText
     private lateinit var searchButton: Button
     private lateinit var foodRecyclerView: RecyclerView
@@ -38,9 +39,11 @@ class SearchFoodActivity : AppCompatActivity() {
             insets
         }
 
+        db = DBHelper(this, null)
+
         // Inisialisasi RecyclerView dan Adapter
         foodRecyclerView = findViewById(R.id.foodRecyclerView)
-        allFoods = FoodSource().getFoodArrayList()
+        allFoods = db.getAllFood()
         foodAdapter = FoodAdapter(this, allFoods)
         foodRecyclerView.layoutManager = LinearLayoutManager(this)
         foodRecyclerView.adapter = foodAdapter
@@ -92,12 +95,12 @@ class FoodAdapter(private val context: SearchFoodActivity, private var foodList:
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
         val currentItem = filteredFoodList[position]
         holder.foodName.text = currentItem.name
-        val caloriesPer100g = currentItem.calories * 100
-        holder.foodDesc.text = "%.2f Cal, (100 g)".format(caloriesPer100g)
+        val caloriesPer100g = currentItem.calories.times(100).toInt()
+        holder.foodDesc.text = "%d Cal, (100 g)".format(caloriesPer100g)
 
         holder.itemView.setOnClickListener { // Add click listener to itemView
             val intent = Intent(context, AddFoodActivity::class.java) // Create Intent
-            intent.putExtra("foodName", currentItem.name) // Pass food name to AddFoodActivity
+            intent.putExtra("foodId", currentItem.id) // Pass food name to AddFoodActivity
             context.startActivity(intent) // Start AddFoodActivity
         }
     }

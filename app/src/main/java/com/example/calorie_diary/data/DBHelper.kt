@@ -32,7 +32,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 " weight       INTEGER NOT NULL," +
                 " height       INTEGER NOT NULL," +
                 " gender       TEXT    NOT NULL," +
-                " is_logged_id INTEGER NOT NULL DEFAULT 1," +
+                " is_logged_in INTEGER NOT NULL DEFAULT 1," +
                 " PRIMARY KEY (id) );")
 
         val food = ("CREATE TABLE $FOOD (" +
@@ -149,7 +149,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun getCurrentUserId() : Int? {
         var id: Int? = null
         val db = this.readableDatabase
-        val cursorUser = db.rawQuery("SELECT id FROM $USER WHERE is_logged_id = ?", arrayOf("1"))
+        val cursorUser = db.rawQuery("SELECT id FROM $USER WHERE is_logged_in = ?", arrayOf("1"))
         if (cursorUser.moveToFirst()) {
             id = cursorUser.getString(0).toInt()
         }
@@ -189,7 +189,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun getAllFood(): ArrayList<Food> {
         val db = this.readableDatabase
         val foodArrayList = ArrayList<Food>()
-        val cursorFood = db.rawQuery("SELECT * FROM $FOOD LIMIT 50", null)
+        val cursorFood = db.rawQuery("SELECT * FROM $FOOD", null)
         if (cursorFood.moveToFirst()) {
             do {
                 foodArrayList.add(
