@@ -237,7 +237,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun getAllFood(): ArrayList<Food> {
         val db = this.readableDatabase
         val foodArrayList = ArrayList<Food>()
-        val cursorFood = db.rawQuery("SELECT * FROM $FOOD LIMIT 50", null)
+        val cursorFood = db.rawQuery("SELECT * FROM $FOOD", null)
         if (cursorFood.moveToFirst()) {
             do {
                 foodArrayList.add(
@@ -260,6 +260,24 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         var food: Food? = null
         val db = this.readableDatabase
         val cursorFood = db.rawQuery("SELECT * FROM $FOOD WHERE id = ?", arrayOf(id.toString()))
+        if (cursorFood.moveToFirst()) {
+            food = Food(
+                cursorFood.getInt(0),
+                cursorFood.getString(1),
+                cursorFood.getDouble(2),
+                cursorFood.getDouble(3),
+                cursorFood.getDouble(4),
+                cursorFood.getDouble(5),
+            )
+        }
+        cursorFood.close()
+        return food
+    }
+
+    fun getFoodByName(name: String): Food? {
+        var food: Food? = null
+        val db = this.readableDatabase
+        val cursorFood = db.rawQuery("SELECT * FROM $FOOD WHERE name = ?", arrayOf(name))
         if (cursorFood.moveToFirst()) {
             food = Food(
                 cursorFood.getInt(0),
@@ -408,5 +426,20 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val db = this.writableDatabase
         db.update(CALORIE_DIARIES, values, "user_id = ? AND date = ?", arrayOf(id.toString(), date))
         db.close()
+    }
+
+    fun updateCalorieDiariesAfterFoodAddition(userId: Int, date: String, food: Food, foodWeight: Int) {
+        val todayCalorieDiaries = getCalorieDiariesByDate(userId, date)
+        if (todayCalorieDiaries != null) {
+            val values = ContentValues()
+            values.put("progress_calories", todayCalorieDiaries.progressCalories + (food.calories * foodWeight))
+            values.put("progress_carbohydrate", todayCalorieDiaries.progressCarbohydrate + (food.carbohydrate * foodWeight))
+            values.put("progress_proteins", todayCalorieDiaries.progressProteins + (food.proteins * foodWeight))
+            values.put("progress_fat", todayCalorieDiaries.progressFat + (food.fat * foodWeight))
+
+            val db = this.writableDatabase
+            db.update(CALORIE_DIARIES, values, "user_id = ? AND date = ?", arrayOf(userId.toString(), date))
+            db.close()
+        }
     }
 }

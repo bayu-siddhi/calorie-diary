@@ -15,18 +15,19 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import com.example.calorie_diary.data.DBHelper
+import com.example.calorie_diary.data.model.Food
 import com.example.calorie_diary.util.SystemBar
 
 class SearchFoodActivity : AppCompatActivity() {
-
     private lateinit var db: DBHelper
     private lateinit var typeFoodInput: EditText
     private lateinit var searchButton: Button
     private lateinit var foodRecyclerView: RecyclerView
     private lateinit var foodAdapter: FoodAdapter
     private lateinit var foods: List<Food>
+    private lateinit var allFoods: List<Food>
+    private lateinit var displayedFoods: MutableList<Food>
     private lateinit var backButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +39,15 @@ class SearchFoodActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        
         SystemBar().setSystemBarColor(this)
-
+        
+        db = DBHelper(this, null)
+        
         // Inisialisasi RecyclerView dan Adapter
         foodRecyclerView = findViewById(R.id.foodRecyclerView)
-        foods = getFoodData()
-        foodAdapter = FoodAdapter(foods)
+        allFoods = db.getAllFood()
+        foodAdapter = FoodAdapter(this, allFoods)
         foodRecyclerView.layoutManager = LinearLayoutManager(this)
         foodRecyclerView.adapter = foodAdapter
 
@@ -73,39 +76,19 @@ class SearchFoodActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
 
-    // Fungsi untuk mendapatkan data makanan
-    private fun getFoodData(): List<Food> {
-        val foods = ArrayList<Food>()
-        foods.add(Food("Banana", "93 Cal, 1 banana (100 g)"))
-        foods.add(Food("Apple", "95 Cal, 1 apple (100 g)"))
-        foods.add(Food("Orange", "62 Cal, 1 orange (100 g)"))
-        foods.add(Food("Grapes", "69 Cal, 1 cup (151 g)"))
-        foods.add(Food("Strawberries", "32 Cal, 1 cup (144 g)"))
-        foods.add(Food("Watermelon", "30 Cal, 1 cup (152 g)"))
-        foods.add(Food("Avocado", "160 Cal, 1 avocado (201 g)"))
-        foods.add(Food("Pineapple", "83 Cal, 1 cup (165 g)"))
-        foods.add(Food("Pear", "102 Cal, 1 pear (178 g)"))
-        foods.add(Food("Blueberries", "84 Cal, 1 cup (148 g)"))
-        foods.add(Food("Peach", "59 Cal, 1 peach (150 g)"))
-        foods.add(Food("Mango", "99 Cal, 1 mango (336 g)"))
-        foods.add(Food("Cherries", "87 Cal, 1 cup (154 g)"))
-        foods.add(Food("Kiwi", "42 Cal, 1 kiwi (69 g)"))
-        foods.add(Food("Cantaloupe", "53 Cal, 1 cup (177 g)"))
-        foods.add(Food("Pomegranate", "83 Cal, 1 pomegranate (282 g)"))
-        foods.add(Food("Apricot", "48 Cal, 1 apricot (35 g)"))
-        foods.add(Food("Plum", "30 Cal, 1 plum (66 g)"))
-        foods.add(Food("Raspberry", "64 Cal, 1 cup (123 g)"))
-        foods.add(Food("Blackberries", "62 Cal, 1 cup (144 g)"))
-        return foods
+        val sharedPreferences = getSharedPreferences("calorie_data", MODE_PRIVATE)
+        val totalCalories = sharedPreferences.getFloat("totalCalories", 0f)
+        val maxCalories = sharedPreferences.getFloat("maxCalories", 0f)
+        val textView2 = findViewById<TextView>(R.id.textView2)
+        textView2.text = "${totalCalories.toInt()}/${maxCalories.toInt()} cals"
     }
 
 }
 
-data class Food(val name: String, val description: String)
+data class Food(val name: String, val description: String, val calories: Double)
 
-class FoodAdapter(private var foodList: List<Food>) :
+class FoodAdapter(private val context: SearchFoodActivity, private var foodList: List<Food>) :
     RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     private var filteredFoodList: List<Food> = foodList.toMutableList()
@@ -124,7 +107,14 @@ class FoodAdapter(private var foodList: List<Food>) :
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
         val currentItem = filteredFoodList[position]
         holder.foodName.text = currentItem.name
-        holder.foodDesc.text = currentItem.description
+        val caloriesPer100g = currentItem.calories.times(100).toInt()
+        holder.foodDesc.text = "%d Cal, (100 g)".format(caloriesPer100g)
+
+        holder.itemView.setOnClickListener { // Add click listener to itemView
+            val intent = Intent(context, AddFoodActivity::class.java) // Create Intent
+            intent.putExtra("foodId", currentItem.id) // Pass food name to AddFoodActivity
+            context.startActivity(intent) // Start AddFoodActivity
+        }
     }
 
     override fun getItemCount(): Int {

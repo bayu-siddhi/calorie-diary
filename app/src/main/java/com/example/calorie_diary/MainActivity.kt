@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         caloriesText = findViewById(R.id.cals_text)
         carbohydrateText = findViewById(R.id.carbs_text)
-        proteinsText= findViewById(R.id.protein_text)
+        proteinsText = findViewById(R.id.protein_text)
         fatText = findViewById(R.id.fat_text)
 
         val userId: Int? = db.getCurrentUserId()
@@ -100,12 +100,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun startCaloriDiariesToday(userId: Int) {
         stringDate = StringDate()
-        var calorieDiaries: CalorieDiaries? = db.getCalorieDiariesByDate(userId, stringDate.getCurrentDate())
+        var calorieDiaries: CalorieDiaries? =
+            db.getCalorieDiariesByDate(userId, stringDate.getCurrentDate())
         if (calorieDiaries == null) {
             val user: User? = db.getUserById(userId)
             if (user != null) {
                 calculator = Calculator(user.gender, user.weight, user.height, user.age)
-                calorieDiaries = CalorieDiaries(userId, stringDate.getCurrentDate(),
+                calorieDiaries = CalorieDiaries(
+                    userId, stringDate.getCurrentDate(),
                     0.0, calculator.maxCalories(),
                     0.0, calculator.maxCarbohydrate(),
                     0.0, calculator.maxProteins(),
@@ -122,7 +124,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun showCalorieDiariesToday(userId: Int) {
         stringDate = StringDate()
-        var calorieDiaries: CalorieDiaries? = db.getCalorieDiariesByDate(userId, stringDate.getCurrentDate())
+        var calorieDiaries: CalorieDiaries? =
+            db.getCalorieDiariesByDate(userId, stringDate.getCurrentDate())
         if (calorieDiaries != null) {
             // Calories
             caloriesProgress.max = calorieDiaries.maxCalories.toInt()
@@ -160,6 +163,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 append(calorieDiaries.maxFat.toInt().toString())
                 append(" g")
             }
+
+            val sharedPreferences = getSharedPreferences("calorie_data", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putFloat("totalCalories", calorieDiaries.progressCalories.toFloat())
+            editor.putFloat("maxCalories", calorieDiaries.maxCalories.toFloat())
+            editor.apply()
+
         } else {
             startCaloriDiariesToday(userId)
         }
@@ -199,6 +209,62 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+    private fun updateCalorieDiariesMax(id: Int, date: String, maxCalories: Double, maxCarbohydrate: Double, maxProteins: Double, maxFat: Double) {
+        stringDate = StringDate()
+        var calorieDiaries: CalorieDiaries? = db.getCalorieDiariesByDate(id, date)
+        if (calorieDiaries != null) {
+            // Ubah nilai properti di objek calorieDiaries
+            calorieDiaries.apply {
+                this.maxCalories = maxCalories
+                this.maxCarbohydrate = maxCarbohydrate
+                this.maxProteins = maxProteins
+                this.maxFat = maxFat
+            }
+
+            // Update the database with new values
+            db.updateCalorieDiariesMax(
+                id, date, maxCalories, maxCarbohydrate, maxProteins, maxFat
+            )
+
+            // Update UI
+            caloriesProgress.max = maxCalories.toInt()
+            caloriesProgress.progress = calorieDiaries.progressCalories.toInt()
+            caloriesText.text = buildString {
+                append(calorieDiaries.progressCalories.toInt().toString())
+                append("/")
+                append(maxCalories.toInt().toString())
+                append("\ncals")
+            }
+
+            carbohydrateProgress.max = maxCarbohydrate.toInt()
+            carbohydrateProgress.progress = calorieDiaries.progressCarbohydrate.toInt()
+            carbohydrateText.text = buildString {
+                append(calorieDiaries.progressCarbohydrate.toInt().toString())
+                append("/")
+                append(maxCarbohydrate.toInt().toString())
+                append(" g")
+            }
+
+            proteinsProgress.max = maxProteins.toInt()
+            proteinsProgress.progress = calorieDiaries.progressProteins.toInt()
+            proteinsText.text = buildString {
+                append(calorieDiaries.progressProteins.toInt().toString())
+                append("/")
+                append(maxProteins.toInt().toString())
+                append(" g")
+            }
+
+            fatProgress.max = maxFat.toInt()
+            fatProgress.progress = calorieDiaries.progressFat.toInt()
+            fatText.text = buildString {
+                append(calorieDiaries.progressFat.toInt().toString())
+                append("/")
+                append(maxFat.toInt().toString())
+                append(" g")
+            }
+        }
+    }
+
 }
 
 class TodayEatingHistoryAdapter(
