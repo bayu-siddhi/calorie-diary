@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_white"
     tools:context=".EditProfileActivity">
 
     <LinearLayout
@@ -13,30 +14,48 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="37dp"
+        android:layout_marginVertical="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- Back Button -->
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="start"
-            android:src="@drawable/ic_back_arrow"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/back_button_desc"/>
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/my_profile"
-            android:fontFamily="@font/poppins_bold"
-            android:textColor="@color/text_black"
-            android:textSize="25sp"/>
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="start"
+                android:src="@drawable/ic_back_arrow"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/back_button_desc"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/my_profile"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/text_black"
+                android:textSize="25sp"/>
+
+            <ImageButton
+                android:id="@+id/backButtonDummy"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_back_arrow"
+                android:background="@android:color/transparent"
+                android:visibility="invisible"/>
+
+        </LinearLayout>
+
 
         <!-- Name -->
         <LinearLayout
@@ -44,7 +63,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end"
-            android:layout_marginVertical="16dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -86,7 +106,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end"
-            android:layout_marginVertical="16dp" >
+            android:layout_marginVertical="12dp" >
 
             <TextView
                 android:layout_width="0dp"
@@ -103,8 +123,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".70"
-                android:background="@drawable/text_input_rounded_corner"
+                android:background="@drawable/text_input_rounded_corner_disabled"
                 android:fontFamily="@font/poppins"
+                android:enabled="false"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:minWidth="48dp"
@@ -128,7 +149,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end"
-            android:layout_marginVertical="16dp" >
+            android:layout_marginVertical="12dp" >
 
             <TextView
                 android:layout_width="0dp"
@@ -170,7 +191,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end"
-            android:layout_marginVertical="16dp" >
+            android:layout_marginVertical="12dp" >
 
             <TextView
                 android:layout_width="0dp"
@@ -212,7 +233,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end"
-            android:layout_marginVertical="16dp" >
+            android:layout_marginVertical="12dp" >
 
             <TextView
                 android:layout_width="0dp"
@@ -254,7 +275,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="end"
-            android:layout_marginVertical="16dp" >
+            android:layout_marginVertical="12dp" >
 
             <TextView
                 android:layout_width="0dp"
@@ -283,6 +304,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/male"
                     android:checked="true"
+                    app:buttonTint="@color/primary"
                     android:textColor="@color/text_black"
                     android:textColorHint="@color/text_black"
                     android:textSize="12sp"
@@ -297,6 +319,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/female"
                     android:checked="false"
+                    app:buttonTint="@color/primary"
                     android:textColor="@color/text_black"
                     android:textColorHint="@color/text_black"
                     android:textSize="12sp"
@@ -318,11 +341,23 @@
             android:id="@+id/save_changes_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/accent"
             android:fontFamily="@font/poppins_bold"
             android:padding="10dp"
             android:text="@string/save_changes"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:backgroundTint="@color/red"
+            android:fontFamily="@font/poppins_bold"
+            android:padding="10dp"
+            android:text="@string/logout"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
