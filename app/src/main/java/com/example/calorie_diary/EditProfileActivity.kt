@@ -36,7 +36,6 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var backButton: ImageButton
     private lateinit var saveChangesButton: Button
     private lateinit var calculator: Calculator
-    private lateinit var stringDate: StringDate
     private lateinit var logOutButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +64,10 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         saveChangesButton = findViewById(R.id.save_changes_button)
         logOutButton = findViewById(R.id.logout_button)
 
+        backButton.setOnClickListener(this)
+        logOutButton.setOnClickListener(this)
+        saveChangesButton.setOnClickListener(this)
+
         // Ambil data pengguna dari database berdasarkan ID pengguna yang sedang login
         val userId = db.getCurrentUserId()
         if (userId != null) {
@@ -83,16 +86,7 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 femaleGenderInput.isChecked = true
             }
-        }
-        saveChangesButton.setOnClickListener {
-            saveChanges()
-        }
-
-        backButton.setOnClickListener(this)
-        logOutButton.setOnClickListener(this)
-
-        val userId = db.getCurrentUserId()
-        if (userId == null) {
+        } else {
             val intent = Intent(this@EditProfileActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
@@ -112,6 +106,8 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
             val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
+        } else if (v?.id == R.id.save_changes_button) {
+            saveChanges()
         }
     }
 

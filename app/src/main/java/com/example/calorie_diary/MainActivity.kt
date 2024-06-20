@@ -11,7 +11,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calorie_diary.data.DBHelper
 import com.example.calorie_diary.data.source.FoodSource
 import com.example.calorie_diary.data.model.CalorieDiaries
-import com.example.calorie_diary.data.model.EatingHistory
 import com.example.calorie_diary.data.model.TodayEatingHistory
 import com.example.calorie_diary.data.model.User
 import com.example.calorie_diary.util.Calculator
@@ -181,21 +179,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        todayEatingHistoryArrayList = db.getEatingHistoryByDate(userId, stringDate.getCurrentDate())
+        todayEatingHistoryArrayList = db.getTodayEatingHistoryByDate(userId, stringDate.getCurrentDate())
         // Data Dummy
-        if (todayEatingHistoryArrayList.size == 0) {
-            db.addEatingHistory(EatingHistory(1, 1, stringDate.getCurrentDate(), 1, 100))
-            db.addEatingHistory(EatingHistory(2, 1, stringDate.getCurrentDate(), 2, 200))
-            db.addEatingHistory(EatingHistory(3, 1, stringDate.getCurrentDate(), 3, 300))
-            db.addEatingHistory(EatingHistory(4, 1, stringDate.getCurrentDate(), 4, 300))
-            db.addEatingHistory(EatingHistory(5, 1, stringDate.getCurrentDate(), 5, 300))
-            db.addEatingHistory(EatingHistory(6, 1, stringDate.getCurrentDate(), 6, 300))
-        }
+        // if (todayEatingHistoryArrayList.size == 0) {
+        //     db.addEatingHistory(EatingHistory(1, 1, stringDate.getCurrentDate(), 1, 100))
+        //     db.addEatingHistory(EatingHistory(2, 1, stringDate.getCurrentDate(), 2, 200))
+        //     db.addEatingHistory(EatingHistory(3, 1, stringDate.getCurrentDate(), 3, 300))
+        //     db.addEatingHistory(EatingHistory(4, 1, stringDate.getCurrentDate(), 4, 300))
+        //     db.addEatingHistory(EatingHistory(5, 1, stringDate.getCurrentDate(), 5, 300))
+        //     db.addEatingHistory(EatingHistory(6, 1, stringDate.getCurrentDate(), 6, 300))
+        // }
         todayEatingHistoryAdapter = TodayEatingHistoryAdapter(todayEatingHistoryArrayList)
         recyclerView.adapter = todayEatingHistoryAdapter
 
         todayEatingHistoryAdapter.onItemClick = {
-            db.deleteEatingHistoryById(it.id)
+            db.deleteEatingHistoryById(it.id, it.foodId, userId)
+            showCalorieDiariesToday(userId)
             showEatingHistoryToday(userId)
         }
     }
@@ -206,61 +205,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val foodArrayList = foodSource.getFoodArrayList()
             for (food in foodArrayList) {
                 db.addFood(food)
-            }
-        }
-    }
-    private fun updateCalorieDiariesMax(id: Int, date: String, maxCalories: Double, maxCarbohydrate: Double, maxProteins: Double, maxFat: Double) {
-        stringDate = StringDate()
-        var calorieDiaries: CalorieDiaries? = db.getCalorieDiariesByDate(id, date)
-        if (calorieDiaries != null) {
-            // Ubah nilai properti di objek calorieDiaries
-            calorieDiaries.apply {
-                this.maxCalories = maxCalories
-                this.maxCarbohydrate = maxCarbohydrate
-                this.maxProteins = maxProteins
-                this.maxFat = maxFat
-            }
-
-            // Update the database with new values
-            db.updateCalorieDiariesMax(
-                id, date, maxCalories, maxCarbohydrate, maxProteins, maxFat
-            )
-
-            // Update UI
-            caloriesProgress.max = maxCalories.toInt()
-            caloriesProgress.progress = calorieDiaries.progressCalories.toInt()
-            caloriesText.text = buildString {
-                append(calorieDiaries.progressCalories.toInt().toString())
-                append("/")
-                append(maxCalories.toInt().toString())
-                append("\ncals")
-            }
-
-            carbohydrateProgress.max = maxCarbohydrate.toInt()
-            carbohydrateProgress.progress = calorieDiaries.progressCarbohydrate.toInt()
-            carbohydrateText.text = buildString {
-                append(calorieDiaries.progressCarbohydrate.toInt().toString())
-                append("/")
-                append(maxCarbohydrate.toInt().toString())
-                append(" g")
-            }
-
-            proteinsProgress.max = maxProteins.toInt()
-            proteinsProgress.progress = calorieDiaries.progressProteins.toInt()
-            proteinsText.text = buildString {
-                append(calorieDiaries.progressProteins.toInt().toString())
-                append("/")
-                append(maxProteins.toInt().toString())
-                append(" g")
-            }
-
-            fatProgress.max = maxFat.toInt()
-            fatProgress.progress = calorieDiaries.progressFat.toInt()
-            fatText.text = buildString {
-                append(calorieDiaries.progressFat.toInt().toString())
-                append("/")
-                append(maxFat.toInt().toString())
-                append(" g")
             }
         }
     }
