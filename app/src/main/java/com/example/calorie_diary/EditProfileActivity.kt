@@ -13,9 +13,11 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calorie_diary.data.DBHelper
+import com.example.calorie_diary.util.SystemBar
 import com.example.calorie_diary.data.model.User
 import com.example.calorie_diary.util.Calculator
 import com.example.calorie_diary.util.StringDate
@@ -35,6 +37,7 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var saveChangesButton: Button
     private lateinit var calculator: Calculator
     private lateinit var stringDate: StringDate
+    private lateinit var logOutButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,8 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
             insets
         }
 
+        SystemBar().setSystemBarColor(this)
+        
         db = DBHelper(this, null)
 
         // Inisialisasi input field
@@ -58,6 +63,7 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         femaleGenderInput = findViewById(R.id.rdb_female_edit)
         backButton = findViewById(R.id.backButton)
         saveChangesButton = findViewById(R.id.save_changes_button)
+        logOutButton = findViewById(R.id.logout_button)
 
         // Ambil data pengguna dari database berdasarkan ID pengguna yang sedang login
         val userId = db.getCurrentUserId()
@@ -81,12 +87,32 @@ class EditProfileActivity : AppCompatActivity(), View.OnClickListener {
         saveChangesButton.setOnClickListener {
             saveChanges()
         }
+
         backButton.setOnClickListener(this)
+        logOutButton.setOnClickListener(this)
+
+        val userId = db.getCurrentUserId()
+        if (userId == null) {
+            val intent = Intent(this@EditProfileActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onClick(v: View?) {
-        val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
-        startActivity(intent)
+        if (v?.id == R.id.logout_button) {
+            val userId = db.getCurrentUserId()
+            if (userId != null) {
+                db.logout(userId)
+            }
+            val intent = Intent(this@EditProfileActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else if (v?.id == R.id.backButton) {
+            val intent = Intent(this@EditProfileActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun saveChanges() {

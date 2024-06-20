@@ -12,8 +12,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calorie_diary.util.SystemBar
 import com.example.calorie_diary.data.DBHelper
 import com.example.calorie_diary.data.model.CalorieDiaries
 import com.example.calorie_diary.data.model.EatingHistory
@@ -54,6 +56,8 @@ class AddFoodActivity : AppCompatActivity(), View.OnClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        SystemBar().setSystemBarColor(this)
 
         db = DBHelper(this, null)
 

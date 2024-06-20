@@ -32,7 +32,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 " weight       INTEGER NOT NULL," +
                 " height       INTEGER NOT NULL," +
                 " gender       TEXT    NOT NULL," +
-                " is_logged_in INTEGER NOT NULL DEFAULT 1," +
+                " is_logged_in INTEGER NOT NULL DEFAULT 0," +
                 " PRIMARY KEY (id) );")
 
         val food = ("CREATE TABLE $FOOD (" +
@@ -101,28 +101,60 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     }
 
     /* USER ======================================================================================*/
-    fun signUp(user: User) {
-        deleteAllData()
+    fun signUp(user: User): Boolean {
         val values = ContentValues()
-        if (user.password != null) {
-            val hash = Bcrypt.hash(user.password, 12)
-            values.put("id", user.id)
-            values.put("name", user.name)
-            values.put("email", user.email)
-            values.put("password", hash)
-            values.put("age", user.age)
-            values.put("weight", user.weight)
-            values.put("height", user.height)
-            values.put("gender", user.gender)
+        val isEmailAvailable = checkUserEmail(user.email)
+        if (!isEmailAvailable) {
+            if (user.password != null) {
+                // TODO: val hash = Bcrypt.hash(user.password, 12)
+                values.put("id", user.id)
+                values.put("name", user.name)
+                values.put("email", user.email)
+                values.put("password", user.password)
+                values.put("age", user.age)
+                values.put("weight", user.weight)
+                values.put("height", user.height)
+                values.put("gender", user.gender)
+                values.put("is_logged_in", user.isLoggedIn)
 
-            val db = this.writableDatabase
-            db.insert(USER, null, values)
-            db.close()
+                val db = this.writableDatabase
+                db.insert(USER, null, values)
+                db.close()
+                return true
+            }
         }
+        return false
     }
 
-    fun logIn(email: String, password: String) {
+    fun logIn(email: String, password: String): Boolean {
         // TODO: Bcrypt.verify(password, hash_password_in_db)
+        val db = this.readableDatabase
+        val cursorUser = db.rawQuery("SELECT id, email, password FROM $USER WHERE email = ?", arrayOf(email))
+        if (cursorUser.moveToFirst()) {
+            val userId = cursorUser.getInt(0)
+            val existingEmail = cursorUser.getString(1)
+            val existingPassword = cursorUser.getString(2)
+            if (email == existingEmail && password == existingPassword) {
+                cursorUser.close()
+                updateUserLoggedIn(userId)
+                return true
+            }
+        }
+        cursorUser.close()
+        return false
+    }
+
+    fun checkUserEmail(email: String): Boolean {
+        var isEmailAvailable: Boolean = false
+        val db = this.readableDatabase
+        val cursorUser = db.rawQuery("SELECT * FROM $USER WHERE email = ?", arrayOf(email))
+        if (cursorUser.moveToFirst()) {
+            if (email == cursorUser.getString(2)) {
+                isEmailAvailable = true
+            }
+        }
+        cursorUser.close()
+        return isEmailAvailable
     }
 
     fun getUserById(id: Int) : User? {
@@ -165,6 +197,22 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         values.put("height", height)
         values.put("gender", gender)
 
+        val db = this.writableDatabase
+        db.update(USER, values, "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
+    fun updateUserLoggedIn(id: Int) {
+        val values = ContentValues()
+        values.put("is_logged_in", 1)
+        val db = this.writableDatabase
+        db.update(USER, values, "id = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
+    fun logout(id: Int) {
+        val values = ContentValues()
+        values.put("is_logged_in", 0)
         val db = this.writableDatabase
         db.update(USER, values, "id = ?", arrayOf(id.toString()))
         db.close()

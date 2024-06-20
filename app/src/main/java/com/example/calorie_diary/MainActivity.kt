@@ -11,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,7 @@ import com.example.calorie_diary.data.model.TodayEatingHistory
 import com.example.calorie_diary.data.model.User
 import com.example.calorie_diary.util.Calculator
 import com.example.calorie_diary.util.StringDate
+import com.example.calorie_diary.util.SystemBar
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -55,6 +57,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             insets
         }
 
+        SystemBar().setSystemBarColor(this)
+
         db = DBHelper(this, null)
         profileButton = findViewById(R.id.profile)
         addFoodButton = findViewById(R.id.add_food_btn)
@@ -78,8 +82,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             showEatingHistoryToday(userId)
             addFoodData()
         } else {
-            val intent = Intent(this@MainActivity, SignUpActivity::class.java)
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
@@ -110,8 +115,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 )
                 db.addCalorieDiaries(calorieDiaries)
             } else {
-                val intent = Intent(this@MainActivity, SignUpActivity::class.java)
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }
     }
@@ -177,15 +183,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         todayEatingHistoryArrayList = db.getEatingHistoryByDate(userId, stringDate.getCurrentDate())
         // Data Dummy
-        // if (todayEatingHistoryArrayList.size == 0) {
-        // db.addEatingHistory(EatingHistory(1, 1, stringDate.getCurrentDate(), 1, 100))
-        // db.addEatingHistory(EatingHistory(2, 1, stringDate.getCurrentDate(), 2, 200))
-        // db.addEatingHistory(EatingHistory(3, 1, stringDate.getCurrentDate(), 3, 300))
-        // db.addEatingHistory(EatingHistory(4, 1, stringDate.getCurrentDate(), 4, 300))
-        // db.addEatingHistory(EatingHistory(5, 1, stringDate.getCurrentDate(), 5, 300))
-        // db.addEatingHistory(EatingHistory(6, 1, stringDate.getCurrentDate(), 6, 300))
-        // todayEatingHistoryArrayList = db.getEatingHistoryByDate(userId, stringDate.getCurrentDate())
-        // }
+        if (todayEatingHistoryArrayList.size == 0) {
+            db.addEatingHistory(EatingHistory(1, 1, stringDate.getCurrentDate(), 1, 100))
+            db.addEatingHistory(EatingHistory(2, 1, stringDate.getCurrentDate(), 2, 200))
+            db.addEatingHistory(EatingHistory(3, 1, stringDate.getCurrentDate(), 3, 300))
+            db.addEatingHistory(EatingHistory(4, 1, stringDate.getCurrentDate(), 4, 300))
+            db.addEatingHistory(EatingHistory(5, 1, stringDate.getCurrentDate(), 5, 300))
+            db.addEatingHistory(EatingHistory(6, 1, stringDate.getCurrentDate(), 6, 300))
+        }
         todayEatingHistoryAdapter = TodayEatingHistoryAdapter(todayEatingHistoryArrayList)
         recyclerView.adapter = todayEatingHistoryAdapter
 

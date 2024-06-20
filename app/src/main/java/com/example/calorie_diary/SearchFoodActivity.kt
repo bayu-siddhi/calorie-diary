@@ -17,6 +17,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.example.calorie_diary.data.DBHelper
 import com.example.calorie_diary.data.model.Food
+import com.example.calorie_diary.util.SystemBar
 
 class SearchFoodActivity : AppCompatActivity() {
     private lateinit var db: DBHelper
@@ -38,9 +39,11 @@ class SearchFoodActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        
+        SystemBar().setSystemBarColor(this)
+        
         db = DBHelper(this, null)
-
+        
         // Inisialisasi RecyclerView dan Adapter
         foodRecyclerView = findViewById(R.id.foodRecyclerView)
         allFoods = db.getAllFood()
@@ -53,6 +56,14 @@ class SearchFoodActivity : AppCompatActivity() {
         searchButton = findViewById(R.id.searchButton)
         backButton = findViewById(R.id.backButton)
 
+        db = DBHelper(this, null)
+        val userId = db.getCurrentUserId()
+        if (userId == null) {
+            val intent = Intent(this@SearchFoodActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         // Set OnClickListener untuk searchButton
         searchButton.setOnClickListener {
             val searchText = typeFoodInput.text.toString().trim()
@@ -63,6 +74,7 @@ class SearchFoodActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             val intent = Intent(this@SearchFoodActivity, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val sharedPreferences = getSharedPreferences("calorie_data", MODE_PRIVATE)
