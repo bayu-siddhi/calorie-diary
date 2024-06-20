@@ -1355,5 +1355,4 @@ class FoodSource {
         foodArrayList.add(Food(null, "yoghurt", 0.52, 0.04, 0.03, 0.03))
         return foodArrayList
     }
-
 }
