@@ -157,6 +157,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 append(calorieDiaries.maxFat.toInt().toString())
                 append(" g")
             }
+
+            val sharedPreferences = getSharedPreferences("calorie_data", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putFloat("totalCalories", calorieDiaries.progressCalories.toFloat())
+            editor.putFloat("maxCalories", calorieDiaries.maxCalories.toFloat())
+            editor.apply()
+
         } else {
             startCaloriDiariesToday(userId)
         }
