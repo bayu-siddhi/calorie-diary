@@ -226,6 +226,24 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return food
     }
 
+    fun getFoodByName(name: String): Food? {
+        var food: Food? = null
+        val db = this.readableDatabase
+        val cursorFood = db.rawQuery("SELECT * FROM $FOOD WHERE name = ?", arrayOf(name))
+        if (cursorFood.moveToFirst()) {
+            food = Food(
+                cursorFood.getInt(0),
+                cursorFood.getString(1),
+                cursorFood.getDouble(2),
+                cursorFood.getDouble(3),
+                cursorFood.getDouble(4),
+                cursorFood.getDouble(5),
+            )
+        }
+        cursorFood.close()
+        return food
+    }
+
     fun getFoodByKeyword(keyword: String): ArrayList<Food> {
         val db = this.readableDatabase
         val foodArrayList = ArrayList<Food>()
