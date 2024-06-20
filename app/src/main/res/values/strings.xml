@@ -38,18 +38,18 @@
     <!-- Add food -->
     <string name="back_button_desc">Back</string>
     <string name="food_name">Banana</string>
-    <string name="food_calories">93 Cals / 100 g</string>
+    <string name="food_calories">93 Cals (100 g)</string>
     <string name="food_amount_hint">100</string>
     <string name="food_unit">g</string>
     <string name="nutritional_facts_label">Nutritional facts 🍏</string>
     <string name="total_calories_label">Total Calories</string>
-    <string name="total_calories_qty">93 / 500 Cals</string>
+    <string name="total_calories_qty">Total Calories: 93 / 500 Cals</string>
     <string name="carbs_label">Carbs</string>
-    <string name="carbs_qty">20 / 36 g</string>
+    <string name="carbs_qty">Carbs: 20 / 36 g</string>
     <string name="protein_label">Protein</string>
-    <string name="protein_qty">1 / 30 g</string>
+    <string name="protein_qty">Protein: 1 / 30 g</string>
     <string name="fat_label">Fat</string>
-    <string name="fat_qty">1 / 24 g</string>
+    <string name="fat_qty">Fat: 1 / 24 g</string>
     <string name="add_food_button">Add this food</string>
     <!-- Search Food -->
     <string name="calorie">0/353 Cal</string>
