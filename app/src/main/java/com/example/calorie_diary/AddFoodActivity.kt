@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.calorie_diary.util.SystemBar
 
 class AddFoodActivity : AppCompatActivity(), View.OnClickListener  {
 
@@ -21,6 +23,9 @@ class AddFoodActivity : AppCompatActivity(), View.OnClickListener  {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        SystemBar().setSystemBarColor(this)
+
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener(this)
     }
@@ -28,5 +33,6 @@ class AddFoodActivity : AppCompatActivity(), View.OnClickListener  {
     override fun onClick(v: View?) {
         val intent = Intent(this@AddFoodActivity, SearchFoodActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
