@@ -25,9 +25,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
         db = DBHelper(this, null)
-        // TODO: Kalau mau reset semua data atau reset tabel
-        // db.deleteAllData()
-        // db.reCreateTable()
+
         val userId = db.getCurrentUserId()
         if (userId == null) {
             addFoodData()

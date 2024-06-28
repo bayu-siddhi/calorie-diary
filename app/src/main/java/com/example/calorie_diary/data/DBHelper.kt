@@ -14,7 +14,7 @@ import com.example.calorie_diary.util.StringDate
 class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
     companion object{
-        private const val DATABASE_NAME = "abc.db"
+        private const val DATABASE_NAME = "calorie_diary.db"
         private const val DATABASE_VERSION = 1
         private const val USER  = "users"
         private const val FOOD = "foods"
@@ -144,7 +144,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return false
     }
 
-    fun checkUserEmail(email: String): Boolean {
+    private fun checkUserEmail(email: String): Boolean {
         var isEmailAvailable: Boolean = false
         val db = this.readableDatabase
         val cursorUser = db.rawQuery("SELECT * FROM $USER WHERE email = ?", arrayOf(email))
@@ -183,7 +183,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val db = this.readableDatabase
         val cursorUser = db.rawQuery("SELECT id FROM $USER WHERE is_logged_in = ?", arrayOf("1"))
         if (cursorUser.moveToFirst()) {
-            id = cursorUser.getString(0).toInt()
+            id = cursorUser.getInt(0)
         }
         cursorUser.close()
         return id
@@ -202,7 +202,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-    fun updateUserLoggedIn(id: Int) {
+    private fun updateUserLoggedIn(id: Int) {
         val values = ContentValues()
         values.put("is_logged_in", 1)
         val db = this.writableDatabase
@@ -329,7 +329,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return false
     }
 
-    fun getEatingHistoryById(id: Int): EatingHistory? {
+    private fun getEatingHistoryById(id: Int): EatingHistory? {
         val db = this.readableDatabase
         var eatingHistory: EatingHistory? = null
         val cursorEatingHistory = db.rawQuery("SELECT * FROM $EATING_HISTORY WHERE id = ?", arrayOf(id.toString()))
@@ -431,7 +431,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         }
     }
 
-    fun updateCalorieDiariesProgressMinus(userId: Int, date: String, calories: Double, carbohydrate: Double, proteins: Double, fat: Double) {
+    private fun updateCalorieDiariesProgressMinus(userId: Int, date: String, calories: Double, carbohydrate: Double, proteins: Double, fat: Double) {
         val todayCalorieDiaries = getCalorieDiariesByDate(userId, date)
         if (todayCalorieDiaries != null) {
             val values = ContentValues()

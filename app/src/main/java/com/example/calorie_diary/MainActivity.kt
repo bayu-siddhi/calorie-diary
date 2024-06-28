@@ -180,15 +180,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         todayEatingHistoryArrayList = db.getTodayEatingHistoryByDate(userId, stringDate.getCurrentDate())
-        // Data Dummy
-        // if (todayEatingHistoryArrayList.size == 0) {
-        //     db.addEatingHistory(EatingHistory(1, 1, stringDate.getCurrentDate(), 1, 100))
-        //     db.addEatingHistory(EatingHistory(2, 1, stringDate.getCurrentDate(), 2, 200))
-        //     db.addEatingHistory(EatingHistory(3, 1, stringDate.getCurrentDate(), 3, 300))
-        //     db.addEatingHistory(EatingHistory(4, 1, stringDate.getCurrentDate(), 4, 300))
-        //     db.addEatingHistory(EatingHistory(5, 1, stringDate.getCurrentDate(), 5, 300))
-        //     db.addEatingHistory(EatingHistory(6, 1, stringDate.getCurrentDate(), 6, 300))
-        // }
         todayEatingHistoryAdapter = TodayEatingHistoryAdapter(todayEatingHistoryArrayList)
         recyclerView.adapter = todayEatingHistoryAdapter
 

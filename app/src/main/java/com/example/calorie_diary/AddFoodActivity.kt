@@ -12,7 +12,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calorie_diary.util.SystemBar
@@ -20,7 +19,6 @@ import com.example.calorie_diary.data.DBHelper
 import com.example.calorie_diary.data.model.CalorieDiaries
 import com.example.calorie_diary.data.model.EatingHistory
 import com.example.calorie_diary.util.StringDate
-import com.example.calorie_diary.util.StringFunction
 
 class AddFoodActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -90,7 +88,7 @@ class AddFoodActivity : AppCompatActivity(), View.OnClickListener {
             foodFat = food.fat
 
             // Tampilkan food details
-            foodNameTextView.text = StringFunction().titleCase((foodName))
+            foodNameTextView.text = foodName
             foodCaloriesTextView.text = buildString {
                 append(foodCalories.times(100).toInt().toString())
                 append(" cals / 100 g")

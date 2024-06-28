@@ -3,18 +3,14 @@ package com.example.calorie_diary
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsetsController
-import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.calorie_diary.data.DBHelper
-import com.example.calorie_diary.data.model.User
 import com.example.calorie_diary.util.SystemBar
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
