@@ -30,7 +30,7 @@ However, in implementing the Calorie Diary application, the BMR calculation resu
 
 Apart from calculating the user's maximum daily calorie intake, the application will also calculate the user's macronutrient needs which are divided into carbohydrates, protein and fat. The implementation of macronutrient calculations in the Calorie Diary application is based on [other references](https://www.healthline.com/nutrition/how-to-count-macros), where there is a range of ratios of maximum needs for each type of macronutrient to a person's maximum daily calorie intake as follows.
 
-- $macronutrient \space intake \space (cal) = macronutrient \space ratio \space (\%) \times maximum \space calorie \space limit \space (cal)$
+- $macronutrient \space intake \space (cal) = macronutrient \space ratio \times maximum \space calorie \space limit \space (cal)$
 
 In implementing the Calorie Diary, the following macronutrient ratios are used.
 - Carbohydrates = 50% total calories
